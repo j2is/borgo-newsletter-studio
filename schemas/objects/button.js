@@ -1,16 +1,15 @@
 export default {
   type: "object",
-  name: "imageBlock",
-  title: "Image Block",
+  name: "button",
+  title: "Button",
   fields: [
     {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-        layout: "grid",
-      },
+      title: "Title",
+      name: "title",
+      type: "string",
+      placeholder: "Shop now",
+      initialValue: "Shop now",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "link",
@@ -28,12 +27,13 @@ export default {
   ],
   preview: {
     select: {
-      media: "image",
+      title: "title",
+      link: "link",
     },
-    prepare({ media }) {
+    prepare({ title, link }) {
       return {
-        title: "-",
-        media,
+        title,
+        subtitle: link,
       };
     },
   },

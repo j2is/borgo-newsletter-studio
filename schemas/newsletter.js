@@ -1,7 +1,12 @@
+import { v4 as uuidv4 } from "uuid";
+const uid = uuidv4();
+const currentDate = new Date().toISOString().split("T")[0];
+
 export default {
   name: "newsletter",
   title: "Newsletter",
   type: "document",
+  liveEdit: true,
   fields: [
     {
       title: "Title",
@@ -13,17 +18,29 @@ export default {
       name: "postDate",
       type: "date",
       dateFormat: "YYYY-MM-DD",
+      hidden: true,
       validation: (Rule) => Rule.required(),
     },
     {
       title: "Slug",
       name: "slug",
       type: "slug",
+      hidden: true,
+      description:
+        'Needed to enable email preview, click "Generate" if this is empty',
       options: {
         maxLength: 500,
-        source: (doc) => `${doc.postDate || ""}`,
+        source: (doc) => {
+          return `${doc.postDate || currentDate}-${uid}`;
+        },
       },
       validation: (Rule) => Rule.required(),
+    },
+    {
+      title: "Include header?",
+      name: "includeHeader",
+      type: "boolean",
+      initialValue: true,
     },
     {
       title: "Content",
@@ -31,9 +48,19 @@ export default {
       type: "array",
       of: [
         {
-          type: "image",
-          name: "singleImage",
+          type: "imageBlock",
+          name: "imageBlock",
           title: "Image",
+        },
+        {
+          type: "button",
+          name: "button",
+          title: "Button",
+        },
+        {
+          type: "titleEmail",
+          name: "titleEmail",
+          title: "Title",
         },
         {
           type: "textEmail",
@@ -43,20 +70,41 @@ export default {
         {
           type: "twoColumn",
           name: "twoColumn",
-          title: "Two Column",
+          title: "Two Column Image + Image",
+        },
+        {
+          type: "twoColumnImageText",
+          name: "twoColumnImageText",
+          title: "Two Column Image + Text",
+        },
+        {
+          type: "space",
+          name: "space",
+          title: "Space",
+        },
+        {
+          type: "line",
+          name: "line",
+          title: "Line",
         },
       ],
     },
   ],
-  initialValue: () => ({}),
+  initialValue: () => ({
+    postDate: currentDate,
+    slug: { current: `${currentDate}-${uid}` },
+  }),
   preview: {
     select: {
+      title: "title",
       postDate: "postDate",
     },
-    prepare({ postDate }) {
-      const date = postDate ? `Email ${postDate}` : "🔴 No date defined";
+    prepare({ title, postDate }) {
+      const emailTitle = title || postDate;
+      const date = postDate ? `${postDate}` : "🔴 No date defined";
       return {
-        title: date,
+        title: emailTitle,
+        subtitle: date,
       };
     },
   },

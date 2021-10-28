@@ -4,6 +4,8 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // We import object and document schemas
 import newsletter from "./newsletter";
+import footerLinks from "./footerLinks";
+import header from "./header";
 
 import normal from "./blocks/normal";
 import blockQuote from "./blocks/blockquote";
@@ -15,7 +17,9 @@ import headingTwoThreeNormalSmall from "./blocks/headingTwoThreeNormalSmall";
 
 import link from "./objects/link";
 import textEmail from "./objects/textEmail";
+import titleEmail from "./objects/titleEmail";
 import twoColumn from "./objects/twoColumn";
+import twoColumnImageText from "./objects/twoColumnImageText";
 import quote from "./objects/quote";
 import statistic from "./objects/statistic";
 import contactBlock from "./objects/contactBlock";
@@ -31,11 +35,17 @@ import colourBlock from "./objects/colourBlock";
 import paragraph from "./objects/paragraph";
 import editorialParagraph from "./objects/editorialParagraph";
 import vcard from "./objects/vcard";
+import button from "./objects/button";
+import space from "./objects/space";
+import line from "./objects/line";
 
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     newsletter,
+    header,
+    titleEmail,
+    button,
     textEmail,
     normal,
     blockQuote,
@@ -61,5 +71,9 @@ export default createSchema({
     link,
     body,
     vcard,
+    twoColumnImageText,
+    space,
+    line,
+    footerLinks,
   ]),
 });

@@ -8,8 +8,8 @@ export default function EmailPreview(props) {
   }
   const url =
     process.env.NODE_ENV === "production"
-      ? `https://borgo-newsletter.vercel.app/email/${displayed?.slug?.current}?preview`
-      : `http://localhost:3000/email/${displayed?.slug?.current}?preview`;
+      ? `https://borgo-newsletter.vercel.app/email/${displayed?.slug?.current}?preview=true`
+      : `http://localhost:3000/email/${displayed?.slug?.current}?preview=true`;
 
   return (
     <div className={styles.componentWrapper}>

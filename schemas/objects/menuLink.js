@@ -12,11 +12,14 @@ export default {
       title: "URL",
       name: "url",
       type: "url",
-      validation: (Rule) =>
+      initialValue: "https://borgodenor.com",
+      validation: (Rule) => [
         Rule.uri({
-          allowRelative: true,
-          relativeOnly: true,
+          scheme: ["http", "https", "mailto", "tel"],
+          allowRelative: false,
         }),
+        Rule.required(),
+      ],
     },
   ],
   preview: {
