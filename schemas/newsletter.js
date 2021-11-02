@@ -25,7 +25,6 @@ export default {
       title: "Slug",
       name: "slug",
       type: "slug",
-      hidden: true,
       description:
         'Needed to enable email preview, click "Generate" if this is empty',
       options: {
