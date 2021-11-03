@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-const uid = uuidv4();
 const currentDate = new Date().toISOString().split("T")[0];
 
 export default {
@@ -30,6 +29,7 @@ export default {
       options: {
         maxLength: 500,
         source: (doc) => {
+          const uid = uuidv4();
           return `${doc.postDate || currentDate}-${uid}`;
         },
       },
@@ -91,7 +91,6 @@ export default {
   ],
   initialValue: () => ({
     postDate: currentDate,
-    slug: { current: `${currentDate}-${uid}` },
   }),
   preview: {
     select: {
