@@ -8,6 +8,12 @@ export default {
       name: "text",
       type: "text",
     },
+    {
+      title: "Left-align",
+      name: "leftAlign",
+      type: "boolean",
+      initialValue: false,
+    },
   ],
   preview: {
     select: {
